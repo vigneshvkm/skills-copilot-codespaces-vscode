@@ -8,7 +8,7 @@ if (!process.env.SEARCH) {
     process.exit(1);
 }
 
-//create web server
+//Create web server
 var express = require('express');
 var app = express();
 
