@@ -1,30 +1,19 @@
 //create web server
 var express = require('express');
 var app = express();
-var fs = require('fs');
-var bodyParser = require('body-parser');
 
-//set the view engine to ejs
-app.set('view engine', 'ejs');
+//create comments array
+var comments = [
+    {name: 'John', comment: 'Hello'},
+    {name: 'Mary', comment: 'Hi'}
+];
 
-//use body parser
-app.use(bodyParser.urlencoded({extended: false}));
-
-//get comments from file
-var comments = JSON.parse(fs.readFileSync('comments.json', 'utf8'));
-
-//get comments
-app.get('/', function(req, res) {
-  res.render('index', {comments: comments});
+//display comments
+app.get('/comments', function(req, res) {
+    res.json(comments);
 });
 
-//add comment
-app.post('/comment', function(req, res) {
-  comments.push(req.body.comment);
-  fs.writeFileSync('comments.json', JSON.stringify(comments));
-  res.redirect('/');
+//listen on port 3000
+app.listen(3000, function() {
+    console.log('Listening on http://localhost:3000');
 });
-
-//listen on port 8080
-app.listen(8080);
-console.log('listening on port 8080');
