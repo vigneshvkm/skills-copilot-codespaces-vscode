@@ -1,3 +1,13 @@
+// Check that all required env variables are set
+if (!process.env.FILE) {
+    console.error("FILE is unset or set to the empty string");
+    process.exit(1);
+}
+if (!process.env.SEARCH) {
+    console.error("SEARCH is unset or set to the empty string");
+    process.exit(1);
+}
+
 //create web server
 var express = require('express');
 var app = express();
